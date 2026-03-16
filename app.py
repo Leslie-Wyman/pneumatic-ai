@@ -1,0 +1,381 @@
+import streamlit as st
+import pandas as pd
+from openai import OpenAI
+from datetime import datetime
+import warnings
+import streamlit.components.v1 as components
+import os
+
+# 0. 全局配置
+warnings.filterwarnings("ignore")
+
+API_KEY = "sk-iyznjopbdylxmcjtteregjqpeixnsmbnuwfpvaiejpbqdomd"
+BASE_URL = "https://api.siliconflow.cn/v1"
+MODEL_NAME = "deepseek-ai/DeepSeek-V3"
+
+st.set_page_config(
+    page_title="爱选型",
+    page_icon="",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
+#  1. 状态机初始化
+if "current_page" not in st.session_state:
+    st.session_state.current_page = "💬 选型助理"
+if "index_expanded" not in st.session_state:
+    st.session_state.index_expanded = False
+if "open_components" not in st.session_state:
+    st.session_state.open_components = {}
+if "history_log" not in st.session_state:
+    st.session_state.history_log = []
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+if "current_history_idx" not in st.session_state:
+    st.session_state.current_history_idx = None
+
+
+def nav_to(page_name):
+    st.session_state.current_page = page_name
+
+
+def toggle_index():
+    st.session_state.index_expanded = not st.session_state.index_expanded
+
+
+def toggle_comp(comp_name):
+    st.session_state.open_components[comp_name] = not st.session_state.open_components.get(comp_name, False)
+
+
+def generate_short_title(text):
+    keywords = ["气缸", "气爪", "电磁阀", "比例阀", "减压阀", "真空", "吸盘", "传感器", "SMC", "亚德客", "Festo",
+                "推力", "无杆缸", "滑台", "过滤器", "选型", "气源"]
+    found_keys = [k for k in keywords if k in text]
+    if found_keys:
+        return f"关于【{found_keys[0]}】的咨询"
+    else:
+        return text[:10] + "..." if len(text) > 10 else text
+
+
+def load_history(idx):
+    st.session_state.messages = list(st.session_state.history_log[idx]["messages"])
+    st.session_state.current_history_idx = idx
+    st.session_state.current_page = "💬 选型助理"
+
+
+def new_chat():
+    st.session_state.messages = []
+    st.session_state.current_history_idx = None
+    st.session_state.current_page = "💬 选型助理"
+
+
+#  2. CSS 样式
+st.markdown("""
+<style>
+    .stException, .stAlert, [data-testid="stException"] { display: none !important; }
+
+    .block-container {
+        padding-top: 2rem !important;
+        padding-bottom: 6rem !important; 
+        max-width: 95% !important;
+    }
+
+    .big-title {
+        font-size: 90px !important; 
+        font-weight: 900;
+        text-align: left !important;
+        color: #111 !important; 
+        margin-top: 10px;
+        margin-bottom: 5px;
+        letter-spacing: 4px;
+    }
+    .sub-title {
+        font-size: 36px !important; 
+        color: #111 !important; 
+        font-weight: 600;
+        margin-bottom: 45px;
+    }
+
+    hr.nav-hr {
+        margin: 4px 0 !important;
+        border: none !important;
+        border-top: 1px solid #ebeef5 !important; 
+    }
+
+    [data-testid="stSidebar"] .stButton > button {
+        border: none !important;
+        background-color: transparent !important;
+        color: #333 !important;
+        font-size: 16px !important;
+        font-weight: 600 !important;
+        justify-content: flex-start !important; 
+        padding: 8px 12px !important;
+        transition: all 0.2s ease !important;
+    }
+    [data-testid="stSidebar"] .stButton > button:hover {
+        background-color: #f0f2f5 !important;
+        color: #1f50ff !important;
+        border-radius: 8px !important;
+    }
+
+    [data-testid="stSidebar"] [data-testid="stExpander"] {
+        border: none !important;
+        background-color: transparent !important;
+        box-shadow: none !important;
+    }
+
+    .user-chat-container {
+        display: flex; justify-content: flex-end; align-items: flex-start; margin-bottom: 20px; width: 100%;
+    }
+    .user-bubble {
+        background-color: #95ec69; color: #000; padding: 12px 16px; border-radius: 8px; position: relative;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.1); max-width: 70%; text-align: left; font-size: 16px; margin-right: 12px;
+    }
+    .user-bubble::after {
+        content: ''; position: absolute; right: -6px; top: 14px; border-top: 6px solid transparent; 
+        border-bottom: 6px solid transparent; border-left: 6px solid #95ec69;
+    }
+    .user-avatar {
+        width: 40px; height: 40px; background-color: #f0f0f0; border-radius: 4px; display: flex; 
+        align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+
+    .stChatMessage { background-color: transparent !important; }
+    [data-testid="stChatMessageContent"] {
+        background-color: #ffffff !important; border-radius: 8px !important; padding: 15px !important;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important; border: 1px solid #f0f0f0 !important;
+    }
+
+    [data-testid="stChatInput"] {
+        border: 2px solid #dcdfe6 !important; border-radius: 16px !important; background-color: #ffffff !important;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.08) !important; padding: 5px 10px !important; transition: all 0.3s ease;
+    }
+    [data-testid="stChatInput"] > div {
+        border: none !important; box-shadow: none !important; outline: none !important; background-color: transparent !important;
+    }
+    [data-testid="stChatInput"] textarea { box-shadow: none !important; outline: none !important; }
+    [data-testid="stChatInput"]:focus-within {
+        border-color: #1f50ff !important; box-shadow: 0 6px 16px rgba(31,80,255,0.15) !important;
+    }
+    [data-testid="stSidebar"] { background-color: #f7f8fa; border-right: 1px solid #ebeef5; }
+</style>
+""", unsafe_allow_html=True)
+
+# 3. 数据加载
+try:
+    csv_path = r"F:\学校\毕设\我的\0314\Pneumatic_Selection\knowledge_graph_triples.csv"
+    if not os.path.exists(csv_path):
+        csv_path = 'knowledge_graph_triples.csv'
+
+    df = pd.read_csv(csv_path)
+
+    if len(df.columns) >= 3:
+        cols = list(df.columns)
+        df.rename(columns={cols[0]: 'Head', cols[1]: 'Relation', cols[2]: 'Tail'}, inplace=True)
+
+    kb_text = df.to_string(index=False)
+except Exception as e:
+    df = pd.DataFrame()
+    kb_text = f"暂无本地知识库"
+
+# 4. 左侧导航栏
+with st.sidebar:
+    st.markdown("### 系统导航")
+
+    st.button("💬 选型助理", on_click=nav_to, args=("💬 选型助理",), use_container_width=True)
+    st.markdown("<hr class='nav-hr'>", unsafe_allow_html=True)
+
+    st.button("🌌 知识图谱", on_click=nav_to, args=("🌌 知识图谱",), use_container_width=True)
+    st.markdown("<hr class='nav-hr'>", unsafe_allow_html=True)
+
+    index_icon = "🔽" if st.session_state.index_expanded else "▶️"
+    st.button(f"{index_icon} 元件索引", on_click=toggle_index, use_container_width=True)
+
+    if st.session_state.index_expanded:
+        if df.empty or 'Tail' not in df.columns:
+            st.error("⚠️ 暂未读取到图谱数据！")
+        else:
+            categories_map = {
+                "执行件 (Actuators)": ["Actuator", "Actuators", "AirCylinder", "ElectricActuator", "Gripper", "Rodless",
+                                       "Rotary", "Slide Table"],
+                "控制件 (Valves)": ["Valve", "Valves", "Valve Island", "Proportional", "Fluid Control"],
+                "气源处理 (Air Prep)": ["AirPreparation", "AirPrep", "Booster", "Regulator", "Micro Filter"],
+                "真空系统 (Vacuum)": ["VacuumComponent", "Vacuum", "Pad", "Filter", "Generator"],
+                "传感元件 (Sensors)": ["Sensor", "Sensors", "Position", "Pressure", "Flow"]
+            }
+
+            for label, target_classes in categories_map.items():
+                with st.expander(label):
+                    try:
+                        series_list = df[df['Tail'].isin(target_classes)]['Head'].dropna().unique()
+                        if len(series_list) > 0:
+                            series_list = sorted(series_list)
+                            for s in series_list:
+                                is_open = st.session_state.open_components.get(s, False)
+                                file_icon = "📂" if is_open else "📁"
+
+                                st.button(f"{file_icon} {s}", key=f"comp_{s}", on_click=toggle_comp, args=(s,),
+                                          use_container_width=True)
+
+                                if is_open:
+                                    params_df = df[df['Head'] == s]
+                                    for _, p_row in params_df.iterrows():
+                                        if p_row['Relation'] in ['CATEGORY', 'IS_A_CLASS', 'Class']:
+                                            continue
+                                        st.markdown(f"""
+                                        <div style='padding-left: 36px; padding-bottom: 4px; font-size: 13px; color: #666; font-family: monospace;'>
+                                            ▪ <b style='color: #444;'>{p_row['Relation']}</b>: {p_row['Tail']}
+                                        </div>
+                                        """, unsafe_allow_html=True)
+                        else:
+                            st.caption("暂未收录该类数据")
+                    except:
+                        st.caption("加载异常")
+
+    st.markdown("---")
+    st.markdown("### 历史记录")
+
+    st.button("⊕新建选型对话", on_click=new_chat, use_container_width=True)
+
+    if len(st.session_state.history_log) == 0:
+        st.caption(" ")
+    else:
+        for idx, item in enumerate(st.session_state.history_log):
+            # 🌟 核心修改：点击历史标题时，调用 load_history 进行时空穿梭
+            # 为了区分新建对话和历史按钮的高亮状态，用简单的图标区分
+            prefix = "🟢" if st.session_state.current_history_idx == idx else "💬"
+            st.button(f"{prefix} {item['title']}", key=f"hist_btn_{idx}", on_click=load_history, args=(idx,),
+                      use_container_width=True)
+
+# 5. 主页面路由分发
+
+if st.session_state.current_page == "💬 选型助理":
+    if len(st.session_state.messages) == 0:
+        st.markdown('<p class="big-title">爱选型(^_−)☆</p>', unsafe_allow_html=True)
+        st.markdown('<p class="sub-title">更懂你的气动元件智能选型助手 —— Leslie in SCUT 2026</p>', unsafe_allow_html=True)
+
+        c1, c2, c3 = st.columns(3)
+        c1.metric("收录参数", f"{len(df)} 条")
+        c2.metric("覆盖品牌", "SMC, AirTAC, Festo")
+        c3.metric("大模型已连接", "DeepSeek-V3")
+        st.write("")
+        st.write("")
+    else:
+        st.markdown("### 💬 爱选型 - 智能助理")
+        st.divider()
+
+    for message in st.session_state.messages:
+        if message["role"] == "user":
+            st.markdown(f"""
+            <div class="user-chat-container">
+                <div class="user-bubble">{message["content"]}</div>
+                <div class="user-avatar">🐱</div>
+            </div>
+            """, unsafe_allow_html=True)
+        else:
+            with st.chat_message("assistant", avatar="🤖"):
+                st.markdown(message["content"])
+
+    user_input = st.chat_input("今天有什么是我可以帮到你的呢(*^▽^*)", accept_file=True)
+
+    if user_input:
+        chat_text = user_input.text if user_input.text else ""
+
+        if user_input.files:
+            import io
+
+            uploaded_file = user_input.files[0]
+            file_name = uploaded_file.name
+            st.toast(f"成功接收附件: {file_name}", icon="📁")
+
+            file_content = ""
+            try:
+                if file_name.endswith('.txt') or file_name.endswith('.md'):
+                    file_content = uploaded_file.read().decode('utf-8')
+                elif file_name.endswith('.csv'):
+                    df_upload = pd.read_csv(uploaded_file)
+                    file_content = df_upload.to_markdown(index=False)
+                elif file_name.endswith('.xlsx') or file_name.endswith('.xls'):
+                    df_upload = pd.read_excel(uploaded_file)
+                    file_content = df_upload.to_markdown(index=False)
+                else:
+                    file_content = "【系统提示】：由于当前大模型为纯文本引擎，无法直接解析该格式。请上传 .txt, .csv 或 .xlsx 格式的参数表。"
+            except Exception as e:
+                file_content = f"文件解析失败: {str(e)}"
+
+            chat_text += f"\n\n*(📎 附件: {file_name})*\n\n**【系统后台提取的文件内容如下】**：\n```\n{file_content}\n```"
+
+        if chat_text.strip():
+            st.session_state.messages.append({"role": "user", "content": chat_text.strip()})
+
+            if st.session_state.current_history_idx is None:
+                new_title = generate_short_title(chat_text.strip())
+                st.session_state.history_log.insert(0,
+                                                    {"title": new_title, "messages": list(st.session_state.messages)})
+                st.session_state.current_history_idx = 0
+                if len(st.session_state.history_log) > 5:
+                    st.session_state.history_log = st.session_state.history_log[:5]
+            else:
+                st.session_state.history_log[st.session_state.current_history_idx]["messages"] = list(
+                    st.session_state.messages)
+
+            st.rerun()
+
+    if st.session_state.messages and st.session_state.messages[-1]["role"] == "user":
+        client = OpenAI(api_key=API_KEY, base_url=BASE_URL)
+        safe_kb = kb_text[:15000]
+
+        system_prompt = f"""
+        你是一个精通【机电一体化】的气动选型专家。
+        【知识库】
+        {safe_kb}
+        【要求】
+        1. 严禁使用 Emoji 表情符号做标题，回答保持严谨。
+        2. 对比或推荐时，必须输出 Markdown 表格。
+        3. 语气绝对专业，必须结合负载、工况进行力学或气动学分析。
+        """
+
+        with st.chat_message("assistant", avatar="🤖"):
+            try:
+                clean_messages = [{"role": "system", "content": system_prompt}]
+                for msg in st.session_state.messages[-4:]:
+                    clean_messages.append({"role": str(msg["role"]), "content": str(msg["content"])})
+
+                stream = client.chat.completions.create(
+                    model=MODEL_NAME,
+                    messages=clean_messages,
+                    stream=True,
+                    timeout=30
+                )
+
+
+                def stream_data():
+                    for chunk in stream:
+                        if chunk.choices[0].delta.content:
+                            yield chunk.choices[0].delta.content
+
+
+                ai_reply = st.write_stream(stream_data)
+                st.session_state.messages.append({"role": "assistant", "content": ai_reply})
+
+                if st.session_state.current_history_idx is not None:
+                    st.session_state.history_log[st.session_state.current_history_idx]["messages"] = list(
+                        st.session_state.messages)
+
+            except Exception as e:
+                st.error(f"系统报错: {str(e)}")
+
+elif st.session_state.current_page == "🌌 知识图谱":
+    html_path = "F:\\学校\\毕设\\我的\\0314\\Pneumatic_Selection\\knowledge_graph_interactive.html"
+
+    if os.path.exists(html_path):
+        try:
+            with open(html_path, "r", encoding="utf-8") as f:
+                html_data = f.read()
+        except UnicodeDecodeError:
+            with open(html_path, "r", encoding="gbk") as f:
+                html_data = f.read()
+
+        components.html(html_data, height=900, scrolling=False)
+    else:
+        st.error("系统缺失 `knowledge_graph_interactive.html` 核心文件。请在后台运行可视化脚本以生成全景图谱。")

@@ -1,0 +1,486 @@
+﻿Head,Relation,Tail
+CP96,IS_A_CLASS,Actuators
+CP96,Brand,SMC
+CP96,Category,Standard
+CP96,Sub_Category,ISO 15552
+CP96,Bore_mm,"32, 40, 50, 63, 80, 100, 125"
+CP96,Range_Spec,Stroke: 25-2000mm
+CP96,Mounting_Options,"LB (脚座), FA/FB (法兰), CA/CB (耳环)"
+CP96,Description,高性能米字型气缸，带气缓冲，适合通用推拉
+SC,IS_A_CLASS,Actuators
+SC,Brand,AirTAC
+SC,Category,Standard
+SC,Sub_Category,ISO 15552
+SC,Bore_mm,32-200
+SC,Range_Spec,Stroke: 25-1000mm
+SC,Mounting_Options,"LB, FA, CA"
+SC,Description,亚德客经典款，性价比极高，市场保有量大
+DSBC,IS_A_CLASS,Actuators
+DSBC,Brand,Festo
+DSBC,Category,Standard
+DSBC,Sub_Category,ISO 15552
+DSBC,Bore_mm,32-125
+DSBC,Range_Spec,Stroke: 25-2000mm
+DSBC,Mounting_Options,Modular System
+DSBC,Description,德系标准缸，带 PPS 自调节缓冲，无需人工调整
+CQ2,IS_A_CLASS,Actuators
+CQ2,Brand,SMC
+CQ2,Category,Compact
+CQ2,Sub_Category,Compact
+CQ2,Bore_mm,"12, 16, 20, 25, 32, 40, 50, 63, 80, 100"
+CQ2,Range_Spec,Stroke: 5-100mm
+CQ2,Mounting_Options,通孔，内螺纹，外螺纹
+CQ2,Description,行业标杆薄型气缸，节省空间，治具首选
+SDA,IS_A_CLASS,Actuators
+SDA,Brand,AirTAC
+SDA,Category,Compact
+SDA,Sub_Category,Compact
+SDA,Bore_mm,12-100
+SDA,Range_Spec,Stroke: 5-100mm
+SDA,Mounting_Options,内螺纹 (标准)
+SDA,Description,亚德客超薄气缸，结构简单紧凑
+MGPM,IS_A_CLASS,Actuators
+MGPM,Brand,SMC
+MGPM,Category,Guided Slide
+MGPM,Sub_Category,Bearing
+MGPM,Bore_mm,12-100
+MGPM,Range_Spec,Stroke: 10-400mm
+MGPM,Mounting_Options,法兰安装
+MGPM,Description,三轴导杆气缸，滑动轴承耐冲击，适合推料 / 阻挡
+MY1,IS_A_CLASS,Actuators
+MY1,Brand,SMC
+MY1,Category,Rodless
+MY1,Sub_Category,Mech Joint
+MY1,Bore_mm,16-100
+MY1,Range_Spec,Stroke: 100-5000mm
+MY1,Mounting_Options,两端安装
+MY1,Description,机械接合式无杆气缸，超长行程，节省轴向空间
+MSQB,IS_A_CLASS,Actuators
+MSQB,Brand,SMC
+MSQB,Category,Rotary
+MSQB,Sub_Category,Rack & Pinion
+MSQB,Bore_mm,"10, 20, 30, 50"
+MSQB,Range_Spec,Angle: 0-190°
+MSQB,Mounting_Options,螺钉调节
+MSQB,Description,齿轮齿条式摆动气缸，用于工件翻转，角度可调
+MHZ2,IS_A_CLASS,Actuators
+MHZ2,Brand,SMC
+MHZ2,Category,Gripper
+MHZ2,Sub_Category,Parallel Style
+MHZ2,Bore_mm,"10, 16, 20, 25, 32, 40"
+MHZ2,Range_Spec,Stroke: 4-22mm (Open)
+MHZ2,Mounting_Options,侧面 / 底部安装
+MHZ2,Description,平行二指气爪，最通用的机械手末端执行器
+MY1B,IS_A_CLASS,Actuators
+MY1B,Brand,SMC
+MY1B,Category,Rodless
+MY1B,Sub_Category,Mechanically Jointed
+MY1B,Bore_mm,25-100
+MY1B,Range_Spec,Stroke: 100-5000mm
+MY1B,Mounting_Options,"Basic, Foot"
+MY1B,Description,机械式无杆气缸，节省安装空间，适合超长行程传输
+CXS,IS_A_CLASS,Actuators
+CXS,Brand,SMC
+CXS,Category,Dual Rod
+CXS,Sub_Category,Slide Bearing
+CXS,Bore_mm,6-32
+CXS,Range_Spec,Stroke: 10-100mm
+CXS,Mounting_Options,"Basic, Bolt"
+CXS,Description,双轴气缸，高抗扭矩能力，适合推举和定位，防止杆旋转
+TN,IS_A_CLASS,Actuators
+TN,Brand,AirTAC
+TN,Category,Dual Rod
+TN,Sub_Category,Twin Rod
+TN,Bore_mm,10-32
+TN,Range_Spec,Stroke: 10-200mm
+TN,Mounting_Options,"Basic, Flange"
+TN,Description,亚德客双轴气缸，双活塞杆设计，抗弯曲抗扭转性能好
+HFY,IS_A_CLASS,Actuators
+HFY,Brand,AirTAC
+HFY,Category,Gripper
+HFY,Sub_Category,Parallel Style
+HFY,Bore_mm,10-32
+HFY,Range_Spec,Stroke: 4-25mm
+HFY,Mounting_Options,"Side, Bottom"
+HFY,Description,亚德客平行气爪，带滚珠导轨，高精度高刚性
+RMS,IS_A_CLASS,Actuators
+RMS,Brand,AirTAC
+RMS,Category,Rotary
+RMS,Sub_Category,Rotary Table
+RMS,Bore_mm,10-50
+RMS,Range_Spec,Angle: 0-190°
+RMS,Mounting_Options,"Table, Flange"
+RMS,Description,亚德客旋转气缸，带调节螺钉，内置磁环
+CY1B,IS_A_CLASS,Actuators
+CY1B,Brand,SMC
+CY1B,Category,Rodless
+CY1B,Sub_Category,Magnetically Coupled
+CY1B,Bore_mm,6-63
+CY1B,Range_Spec,Stroke: 50-1000mm
+CY1B,Mounting_Options,Direct Mount
+CY1B,Description,磁耦合无杆气缸，行程极长且节省一半安装空间
+DRVS,IS_A_CLASS,Actuators
+DRVS,Brand,Festo
+DRVS,Category,Rotary
+DRVS,Sub_Category,Vane
+DRVS,Bore_mm,12-40
+DRVS,Range_Spec,Angle: 90/180/270
+DRVS,Mounting_Options,"Flange, Foot"
+DRVS,Description,半回转摆动气缸，用于工件翻转或分度盘驱动
+HLQ,IS_A_CLASS,Actuators
+HLQ,Brand,AirTAC
+HLQ,Category,Slide Table
+HLQ,Sub_Category,Precision
+HLQ,Bore_mm,6-25
+HLQ,Range_Spec,Stroke: 10-150mm
+HLQ,Mounting_Options,Through Hole
+HLQ,Description,高精度滑台气缸，自带直线导轨，抗侧向载荷能力极强
+SY3000,IS_A_CLASS,Valves
+SY3000,Brand,SMC
+SY3000,Category,Solenoid
+SY3000,Type,Pilot Operated
+SY3000,Function,"5/2, 5/3, 3/2"
+SY3000,Voltage_Signal,"DC24V, AC220V"
+SY3000,Port_Size,"M5, 1/8"
+SY3000,Description,全球主流紧凑型电磁阀，体积小流量大，集装式设计
+4V210,IS_A_CLASS,Valves
+4V210,Brand,AirTAC
+4V210,Category,Solenoid
+4V210,Type,Pilot Operated
+4V210,Function,5/2 Single/Double
+4V210,Voltage_Signal,"DC24V, AC220V"
+4V210,Port_Size,"1/8, 1/4"
+4V210,Description,"中国市场""面包阀""，便宜耐用，控制双作用气缸"
+4V230C,IS_A_CLASS,Valves
+4V230C,Brand,AirTAC
+4V230C,Category,Solenoid
+4V230C,Type,Pilot Operated
+4V230C,Function,5/3 Center Closed
+4V230C,Voltage_Signal,"DC24V, AC220V"
+4V230C,Port_Size,1/4
+4V230C,Description,三位五通中封阀，用于气缸中途停止防止掉落
+ITV1000,IS_A_CLASS,Valves
+ITV1000,Brand,SMC
+ITV1000,Category,Proportional
+ITV1000,Type,Electro-Pneumatic
+ITV1000,Function,Pressure Control
+ITV1000,Voltage_Signal,"0-10V, 4-20mA"
+ITV1000,Port_Size,"1/8, 1/4"
+ITV1000,Description,电气比例阀，根据电信号无级调节气压，智能化控制核心
+VM,IS_A_CLASS,Valves
+VM,Brand,SMC
+VM,Category,Mechanical
+VM,Type,Plunger/Roller
+VM,Function,2/3 Way
+VM,Voltage_Signal,Manual Force
+VM,Port_Size,1/4
+VM,Description,机械阀，通过滚轮或柱塞触发，无需用电
+VT307,IS_A_CLASS,Valves
+VT307,Brand,SMC
+VT307,Category,Solenoid
+VT307,Type,Direct Operated
+VT307,Function,3/2Universal
+VT307,Voltage_Signal,"DC24V, AC220V"
+VT307,Port_Size,"1/8, 1/4"
+VT307,Description,直动式高频阀，可用于真空环境或单作用气缸
+SY5000,IS_A_CLASS,Valves
+SY5000,Brand,SMC
+SY5000,Category,Solenoid
+SY5000,Type,Pilot Operated
+SY5000,Function,5/2 5/3
+SY5000,Voltage_Signal,"DC24V, AC220V"
+SY5000,Port_Size,"1/4, 3/8"
+SY5000,Description,中型流量标准电磁阀，驱动40-63缸径气缸，可集装安装
+AS,IS_A_CLASS,Valves
+AS,Brand,SMC
+AS,Category,Flow Control
+AS,Type,Speed Controller
+AS,Function,Throttle Valve
+AS,Port_Size,"M5, 1/8, 1/4, 3/8"
+AS,Description,L型调速阀，直接安装在气缸接口上，控制气缸运行速度
+4V310,IS_A_CLASS,Valves
+4V310,Brand,AirTAC
+4V310,Category,Solenoid
+4V310,Type,Pilot Operated
+4V310,Function,5/2 Single
+4V310,Voltage_Signal,"DC24V, AC220V"
+4V310,Port_Size,"1/4, 3/8"
+4V310,Description,亚德客300系列，比210流量更大，适合驱动63-80缸径
+3V210,IS_A_CLASS,Valves
+3V210,Brand,AirTAC
+3V210,Category,Solenoid
+3V210,Type,Pilot Operated
+3V210,Function,3/2 NC/NO
+3V210,Voltage_Signal,"DC24V, AC220V"
+3V210,Port_Size,1/4
+3V210,Description,两位三通电磁阀，用于控制单作用气缸或吹气回路
+ASC,IS_A_CLASS,Valves
+ASC,Brand,AirTAC
+ASC,Category,Flow Control
+ASC,Type,One-way Throttle
+ASC,Function,Throttle Valve
+ASC,Port_Size,"1/8, 1/4"
+ASC,Description,单向节流阀，管式安装，调节排气流量以控制速度
+VHK,IS_A_CLASS,Valves
+VHK,Brand,SMC
+VHK,Category,Manual
+VHK,Type,Finger Valve
+VHK,Function,2/3 Way
+VHK,Voltage_Signal,Manual Force
+VHK,Port_Size,"4, 6, 8, 10mm"
+VHK,Description,指动阀（手动开关），用于局部气路的快速通断控制
+VTUG,IS_A_CLASS,Valves
+VTUG,Brand,Festo
+VTUG,Category,Valve Island
+VTUG,Type,Multipole/Fieldbus
+VTUG,Function,"5/2, 5/3, 3/2"
+VTUG,Voltage_Signal,DC24V
+VTUG,Port_Size,M5-1/4
+VTUG,Description,紧凑型智能阀岛，支持PROFINET等总线通讯，大幅减少现场布线
+EX250,IS_A_CLASS,Valves
+EX250,Brand,SMC
+EX250,Category,Valve Island
+EX250,Type,Serial Transmission
+EX250,Function,Multiple
+EX250,Voltage_Signal,DC24V
+EX250,Port_Size,1/8-3/8
+EX250,Description,串行传输汇流板，高度模块化，最多可接32个电磁阀线圈
+VEX,IS_A_CLASS,Valves
+VEX,Brand,SMC
+VEX,Category,Proportional
+VEX,Type,Regulator
+VEX,Function,3 Port
+VEX,Voltage_Signal,DC24V
+VEX,Port_Size,1/8-2
+VEX,Description,大流量电气比例阀，用于精确且快速地控制大型气缸的压力或速度
+KL,IS_A_CLASS,Valves
+KL,Brand,AirTAC
+KL,Category,Fluid Control
+KL,Type,Angle Seat
+KL,Function,2/2 Way
+KL,Voltage_Signal,Pneumatic Control
+KL,Port_Size,3/8-2
+KL,Description,不锈钢角座阀，适用于水、蒸汽等大流量流体的高频启闭控制
+AC-A,IS_A_CLASS,AirPrep
+AC-A,Brand,SMC
+AC-A,Component,FRL Unit
+AC-A,Filtration,5μm
+AC-A,Drain_Type,Auto/Manual
+AC-A,Port_Size,"1/4, 3/8, 1/2"
+AC-A,Description,模块化FRL组合(过滤+减压+油雾)，标准气源处理
+AC,IS_A_CLASS,AirPrep
+AC,Brand,AirTAC
+AC,Component,FRL Unit
+AC,Filtration,40μm
+AC,Drain_Type,Manual/Auto
+AC,Port_Size,"1/4, 3/8"
+AC,Description,亚德客标准二联件，经济适用
+IR,IS_A_CLASS,AirPrep
+IR,Brand,SMC
+IR,Component,Regulator
+IR,Port_Size,"1/8, 1/4"
+IR,Description,精密减压阀，用于需要高精度压力控制的张力系统
+AFF,IS_A_CLASS,AirPrep
+AFF,Brand,SMC
+AFF,Component,Main Filter
+AFF,Filtration,1μm
+AFF,Drain_Type,Auto
+AFF,Port_Size,1/2 - 2
+AFF,Description,主管路过滤器，去除油雾和杂质
+AV,IS_A_CLASS,AirPrep
+AV,Brand,SMC
+AV,Component,Soft Start
+AV,Drain_Type,Solenoid/Manual
+AV,Port_Size,"1/4, 3/8, 1/2"
+AV,Description,软启动阀，通气时压力缓慢上升，防止气缸急速伸出造成事故
+GFC,IS_A_CLASS,AirPrep
+GFC,Brand,AirTAC
+GFC,Component,FRL Unit
+GFC,Filtration,40μm
+GFC,Drain_Type,Auto/Manual
+GFC,Port_Size,"1/4, 3/8, 1/2"
+GFC,Description,亚德客G系列二联件，外观更现代，带内置压力表
+GPR,IS_A_CLASS,AirPrep
+GPR,Brand,AirTAC
+GPR,Component,Regulator
+GPR,Port_Size,1/4
+GPR,Description,精密减压阀，低压控制灵敏度高，用于平衡装置或张力控制
+IDG,IS_A_CLASS,AirPrep
+IDG,Brand,SMC
+IDG,Component,Dryer
+IDG,Port_Size,"1/4, 3/8"
+IDG,Description,膜式空气干燥器，去除压缩空气中的水蒸气，无需电源
+AD402,IS_A_CLASS,AirPrep
+AD402,Brand,SMC
+AD402,Component,Drain
+AD402,Drain_Type,Float Type
+AD402,Port_Size,"3/8, 1/2"
+AD402,Description,自动排水器，安装在管路低点，自动排出冷凝水
+VBA,IS_A_CLASS,AirPrep
+VBA,Brand,SMC
+VBA,Component,Booster
+VBA,Filtration,Pressure Multiplier
+VBA,Drain_Type,Max 2.0MPa
+VBA,Description,"1/4, 3/8, 1/2"
+VBA,Unnamed: 7,气动增压阀，无需纯电，纯靠气动将局部气路压力放大2-4倍
+HR,IS_A_CLASS,AirPrep
+HR,Brand,AirTAC
+HR,Component,Regulator
+HR,Filtration,Precision
+HR,Drain_Type,0.005-0.8MPa
+HR,Description,"1/4, 3/8"
+HR,Unnamed: 7,高精密减压阀，压力波动极小，用于张力控制或测漏设备
+AMH,IS_A_CLASS,AirPrep
+AMH,Brand,SMC
+AMH,Component,Micro Filter
+AMH,Filtration,0.01μm
+AMH,Drain_Type,Auto/Manual
+AMH,Description,1/4 - 2
+AMH,Unnamed: 7,微雾分离器，提供超净气源，滤除99.9%的油雾和微小颗粒
+ZK2,IS_A_CLASS,Vacuum
+ZK2,Brand,SMC
+ZK2,Type,Generator
+ZK2,Spec_Key,Ejector System
+ZK2,Connection,Integrated
+ZK2,Description,高端集成式真空发生器，集成了供给阀、破坏阀、过滤器
+ZH(SMC),IS_A_CLASS,Vacuum
+ZH(SMC),Brand,SMC
+ZH(SMC),Type,Generator
+ZH(SMC),Spec_Key,Box Type
+ZH(SMC),Connection,Tube
+ZH(SMC),Description,基础管接式真空发生器，结构简单，利用文丘里效应
+ZP3,IS_A_CLASS,Vacuum
+ZP3,Brand,SMC
+ZP3,Type,Pad
+ZP3,Spec_Key,Suction Cup
+ZP3,Connection,Adapter
+ZP3,Shape,Flat/Bellows
+ZP3,Description,真空吸盘，平形吸钢板，风琴形吸软包装
+OVEM,IS_A_CLASS,Vacuum
+OVEM,Brand,Festo
+OVEM,Type,Generator
+OVEM,Spec_Key,Smart Vacuum
+OVEM,Connection,Integrated
+OVEM,Description,智能真空发生器，带显示屏和IO-Link通讯
+ZP2,IS_A_CLASS,Vacuum
+ZP2,Brand,SMC
+ZP2,Type,Pad
+ZP2,Spec_Key,Standard Pad
+ZP2,Connection,Vertical Entry
+ZP2,Shape,Flat/Ribbed
+ZP2,Description,标准型真空吸盘，材质多样(NBR/硅胶)，通用性强
+ZPT(SMC),IS_A_CLASS,Vacuum
+ZPT(SMC),Brand,SMC
+ZPT(SMC),Type,Pad
+ZPT(SMC),Spec_Key,Heavy Duty
+ZPT(SMC),Connection,Plunger
+ZPT(SMC),Shape,Deep/Flat
+ZPT(SMC),Description,重载吸盘，带缓冲弹簧杆，适合有高度差的工件抓取
+ZPT(AT),IS_A_CLASS,Vacuum
+ZPT(AT),Brand,AirTAC
+ZPT(AT),Type,Pad
+ZPT(AT),Spec_Key,Suction Cup
+ZPT(AT),Connection,Vertical
+ZPT(AT),Shape,Flat/Bellows
+ZPT(AT),Description,亚德客通用吸盘，性价比高，替换SMC对应型号
+ZH(AT),IS_A_CLASS,Vacuum
+ZH(AT),Brand,AirTAC
+ZH(AT),Type,Generator
+ZH(AT),Spec_Key,Ejector
+ZH(AT),Connection,Inline/Box
+ZH(AT),Description,亚德客基本型真空发生器，管式连接，轻便易安装
+XT661,IS_A_CLASS,Vacuum
+XT661,Brand,SMC
+XT661,Type,Pad
+XT661,Spec_Key,Bernoulli
+XT661,Shape,Flat
+XT661,Description,伯努利悬浮吸盘，非接触式抓取，专用于易碎、极薄或多孔透气工件
+ZFA,IS_A_CLASS,Vacuum
+ZFA,Brand,SMC
+ZFA,Type,Filter
+ZFA,Spec_Key,Vacuum Filter
+ZFA,Shape,Inline
+ZFA,Description,真空管路过滤器，串联在吸盘和发生器之间，防止粉尘吸入导致堵塞
+VN,IS_A_CLASS,Vacuum
+VN,Brand,Festo
+VN,Type,Generator
+VN,Spec_Key,Inline Ejector
+VN,Connection,High Vacuum
+VN,Description,直通式真空发生器，体积如接头般小巧，直接安装在吸盘上方响应极快
+D-M9B,IS_A_CLASS,Sensors
+D-M9B,Brand,SMC
+D-M9B,Type,Position
+D-M9B,Output_Signal,2-wire Solid State
+D-M9B,Detect_Range,On/Off
+D-M9B,Applicable,SMC Cylinders
+D-M9B,Description,无触点磁性开关，直接安装型，检测活塞位置
+D-A93,IS_A_CLASS,Sensors
+D-A93,Brand,SMC
+D-A93,Type,Position
+D-A93,Output_Signal,Reed Switch
+D-A93,Detect_Range,On/Off
+D-A93,Applicable,SMC Cylinders
+D-A93,Description,有触点舌簧开关，价格便宜
+ISE30A,IS_A_CLASS,Sensors
+ISE30A,Brand,SMC
+ISE30A,Type,Pressure
+ISE30A,Output_Signal,NPN/PNP + Analog
+ISE30A,Detect_Range,-0.1 to 1.0 MPa
+ISE30A,Applicable,Air Lines
+ISE30A,Description,数字压力开关，双色显示，带模拟量输出
+PFM7,IS_A_CLASS,Sensors
+PFM7,Brand,SMC
+PFM7,Type,Flow
+PFM7,Output_Signal,Digital Output
+PFM7,Detect_Range,10-1000 L/min
+PFM7,Applicable,Air Lines
+PFM7,Description,数字流量开关，监控系统耗气量和泄漏
+ZSE30A,IS_A_CLASS,Sensors
+ZSE30A,Brand,SMC
+ZSE30A,Type,Pressure
+ZSE30A,Output_Signal,NPN/PNP + Analog
+ZSE30A,Detect_Range,0 to -101 kPa
+ZSE30A,Applicable,Vacuum Lines
+ZSE30A,Description,高精度真空压力开关，用于检测吸盘是否吸住工件
+CS1-F,IS_A_CLASS,Sensors
+CS1-F,Brand,AirTAC
+CS1-F,Type,Position
+CS1-F,Output_Signal,Reed Switch
+CS1-F,Detect_Range,On/Off
+CS1-F,Applicable,AirTAC Cylinders
+CS1-F,Description,亚德客标准有触点磁性开关，通用性强，LED指示灯
+DMSG,IS_A_CLASS,Sensors
+DMSG,Brand,AirTAC
+DMSG,Type,Position
+DMSG,Output_Signal,Solid State
+DMSG,Detect_Range,On/Off
+DMSG,Applicable,AirTAC Cylinders
+DMSG,Description,亚德客通用无触点开关，响应速度快，寿命长
+DPS,IS_A_CLASS,Sensors
+DPS,Brand,AirTAC
+DPS,Type,Pressure
+DPS,Output_Signal,Digital Pressure
+DPS,Detect_Range,NPN/PNP
+DPS,Applicable,Air/Vacuum
+DPS,Description,亚德客数字压力传感器，双画面显示，操作简单
+D-M9NW,IS_A_CLASS,Sensors
+D-M9NW,Brand,SMC
+D-M9NW,Type,Position
+D-M9NW,Output_Signal,3-wire Solid State
+D-M9NW,Detect_Range,On/Off (2-color)
+D-M9NW,Applicable,SMC Cylinders
+D-M9NW,Description,双色显示无触点磁性开关，处于最佳工作位置时亮绿灯，极大降低调试难度
+D-MP,IS_A_CLASS,Sensors
+D-MP,Brand,SMC
+D-MP,Type,Position
+D-MP,Output_Signal,Analog/IO-Link
+D-MP,Detect_Range,0-10V / 4-20mA
+D-MP,Applicable,SMC Cylinders
+D-MP,Description,连续行程传感器，不仅给开关量，还能实时反馈气缸活塞的具体位移数值
+SDAT,IS_A_CLASS,Sensors
+SDAT,Brand,Festo
+SDAT,Type,Position
+SDAT,Output_Signal,Analog/IO-Link
+SDAT,Detect_Range,4-20mA
+SDAT,Applicable,Festo Cylinders
+SDAT,Description,T型槽位置变送器，精准监控执行元件运动轨迹
