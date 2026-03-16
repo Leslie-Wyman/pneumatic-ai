@@ -321,6 +321,8 @@ if st.session_state.current_page == "💬 选型助理":
 
             st.rerun()
 
+
+
     if st.session_state.messages and st.session_state.messages[-1]["role"] == "user":
         client = OpenAI(api_key=API_KEY, base_url=BASE_URL)
         safe_kb = kb_text[:15000]
@@ -329,9 +331,10 @@ if st.session_state.current_page == "💬 选型助理":
         你是一个精通【机电一体化】的气动选型专家。
         【知识库】
         {safe_kb}
+
         【要求】
-        1. 严禁使用 Emoji 表情符号做标题，回答保持严谨。
-        2. 对比或推荐时，必须输出 Markdown 表格。
+        1. 严谨、专业，对比推荐时必须输出 Markdown 表格。
+        2. 严禁使用 Emoji 表情符号做标题，回答保持严谨。
         3. 语气绝对专业，必须结合负载、工况进行力学或气动学分析。
         """
 
@@ -366,7 +369,7 @@ if st.session_state.current_page == "💬 选型助理":
                 st.error(f"系统报错: {str(e)}")
 
 elif st.session_state.current_page == "🌌 知识图谱":
-    html_path = "F:\\学校\\毕设\\我的\\0314\\Pneumatic_Selection\\knowledge_graph_interactive.html"
+    html_path = "knowledge_graph_interactive.html"
 
     if os.path.exists(html_path):
         try:
