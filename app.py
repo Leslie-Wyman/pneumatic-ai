@@ -238,7 +238,7 @@ if st.session_state.current_page == "💬 选型助理":
                                 timeout=90
                             )
 
-                            raw_md = f"# 选型技术规格书\n\n> 生成时间：{datetime.now().strftime('%Y-%m-%d %H:%M')}\n\n" + \
+                            raw_md = f"# 选型技术规格书\n\n> 生成时间：{datetime.now().strftime('%Y-%m-%d %H:%M')}(UTC+0)\n\n" + \
                                      res.choices[0].message.content
 
                             html_body = markdown.markdown(raw_md, extensions=['tables'])
