@@ -235,41 +235,43 @@ if st.session_state.current_page == "💬 选型助理":
                                 model=MODEL_NAME,
                                 messages=[{"role": "user", "content": doc_prompt}],
                                 stream=False,
-                                timeout=45
+                                timeout=90
                             )
 
                             raw_md = f"# 选型技术规格书\n\n> 生成时间：{datetime.now().strftime('%Y-%m-%d %H:%M')}\n\n" + \
                                      res.choices[0].message.content
+
                             html_body = markdown.markdown(raw_md, extensions=['tables'])
+
                             html_template = f"""<!DOCTYPE html>
-                <html>
-                <head>
-                <meta charset="utf-8">
-                <title>爱选型 - 技术报告</title>
-                <style>
-                    body {{ font-family: 'Microsoft YaHei', sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: 40px auto; padding: 20px; }}
-                    h1 {{ text-align: center; color: #1f50ff; border-bottom: 2px solid #1f50ff; padding-bottom: 10px; }}
-                    h2 {{ color: #222; margin-top: 30px; border-left: 4px solid #1f50ff; padding-left: 10px; }}
-                    table {{ width: 100%; border-collapse: collapse; margin-top: 15px; margin-bottom: 20px; font-size: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }}
-                    th, td {{ border: 1px solid #dcdfe6; padding: 12px 15px; text-align: left; }}
-                    th {{ background-color: #f4f6f9; color: #333; font-weight: bold; text-transform: uppercase; }}
-                    tr:nth-child(even) {{ background-color: #fafafa; }}
-                    tr:hover {{ background-color: #f0f4ff; transition: 0.2s; }}
-                    blockquote {{ border-left: 4px solid #ccc; margin: 15px 0; padding-left: 15px; color: #666; background: #f9f9f9; padding: 10px; }}
-                </style>
-                </head>
-                <body>
-                {html_body}
-                </body>
-                </html>"""
+                        <html>
+                        <head>
+                        <meta charset="utf-8">
+                        <title>爱选型 - 技术报告</title>
+                        <style>
+                            body {{ font-family: 'Microsoft YaHei', sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: 40px auto; padding: 20px; }}
+                            h1 {{ text-align: center; color: #1f50ff; border-bottom: 2px solid #1f50ff; padding-bottom: 10px; }}
+                            h2 {{ color: #222; margin-top: 30px; border-left: 4px solid #1f50ff; padding-left: 10px; }}
+                            table {{ width: 100%; border-collapse: collapse; margin-top: 15px; margin-bottom: 20px; font-size: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }}
+                            th, td {{ border: 1px solid #dcdfe6; padding: 12px 15px; text-align: left; }}
+                            th {{ background-color: #f4f6f9; color: #333; font-weight: bold; text-transform: uppercase; }}
+                            tr:nth-child(even) {{ background-color: #fafafa; }}
+                            tr:hover {{ background-color: #f0f4ff; transition: 0.2s; }}
+                            blockquote {{ border-left: 4px solid #ccc; margin: 15px 0; padding-left: 15px; color: #666; background: #f9f9f9; padding: 10px; }}
+                        </style>
+                        </head>
+                        <body>
+                        {html_body}
+                        </body>
+                        </html>"""
 
                             st.session_state["active_idx"] = i
                             st.session_state["active_content"] = html_template
                             st.rerun()
                         except Exception as e:
-                            st.error(f"生成失败: {str(e)}")
+                            st.toast(f"云端网络超时或接口异常: {str(e)}", icon="⚠️")
 
-                if st.session_state.get("active_idx") == i:
+            if st.session_state.get("active_idx") == i:
                     st.download_button(
                         label="下载报告 (.html)",
                         data=st.session_state.get("active_content", ""),
