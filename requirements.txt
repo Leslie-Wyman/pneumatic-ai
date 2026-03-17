@@ -5,3 +5,4 @@ openpyxl
 tabulate
 networkx
 pyvis
+markdown
