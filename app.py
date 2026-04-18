@@ -222,17 +222,18 @@ if st.session_state.current_page == "💬 选型助理":
 
                         with st.spinner("正在融合工况数据，生成规格书中"):
                             doc_prompt = f"""
-    请作为资深气动工程师，将以下【用户的工况需求】与【AI的选型方案】总结成一份专业的《气动系统选型技术报告》。
+                                                    请作为资深气动工程师，将以下【用户的工况需求】与【AI的选型方案】总结成一份专业的《气动系统选型技术报告》。
 
-    核心要求：
-    1. 必须且仅包含五项：项目工况概述、推荐型号清单、技术校核分析、最终选型方案、工程建议。
-    2. 该报告中禁止出现任何公式，所有的校核结果只用填数据并与安全范围或理论值比较
-    2. 只要有参数、型号、对比数据，必须严格使用 Markdown 表格进行排版。
-    3. 语境必须是正规的技术公文，去除所有闲聊和寒暄。
+                                                    核心要求：
+                                                     1. 必须且仅包含五项：项目工况概述、推荐型号清单、技术校核分析、最终选型方案、工程建议。
+                                                     2. 该报告中禁止出现任何公式，所有的校核结果只用填数据并与安全范围或理论值比较
+                                                     3. 只要有参数、型号、对比数据，必须严格使用 Markdown 表格进行排版。
+                                                     4. 语境必须是正规的技术公文，去除所有闲聊和寒暄。
 
-    【用户工况需求】：{user_question}
-    【AI选型方案】：{message['content']}
-    """
+
+                                                    【用户工况需求】：{user_question}
+                                                    【AI选型方案】：{message['content']}
+                                                    """
 
                             try:
                                 client = OpenAI(api_key=API_KEY, base_url=BASE_URL)
@@ -243,57 +244,32 @@ if st.session_state.current_page == "💬 选型助理":
                                     timeout=90
                                 )
 
+                                raw_md = f"# 选型技术规格书\n\n> 生成时间：{datetime.now().strftime('%Y-%m-%d %H:%M')} (UTC+0)\n\n" + \
+                                         res.choices[0].message.content
 
-                                # 1. 模拟论文中提到的 f_extract 映射函数
-                                def extract_bom_matrix(text):
-                                    table_pattern = r'\|.*\|'
-                                    tables = re.findall(table_pattern, text)
-                                    if tables:
-                                        return "\n".join(tables)
-                                    return text
-
-
-                                # 2. 先执行特征抽离，拿到纯净的表格内容
-                                bom_only_content = extract_bom_matrix(res.choices[0].message.content)
-
-                                # 3. 再拼接 Markdown 源码
-                                raw_md = f"# 气动系统选型技术报告\n\n> 生成时间：{datetime.now().strftime('%Y-%m-%d %H:%M')}\n\n" + bom_only_content
-
-                                # 4. 执行交叉编译，生成 HTML 标签
                                 html_body = markdown.markdown(raw_md, extensions=['tables'])
 
-                                # 5. 注入包含 MathJax 的 HTML 模板
                                 html_template = f"""<!DOCTYPE html>
-    <html>
-    <head>
-    <meta charset="utf-8">
-    <title>爱选型 - 技术报告</title>
-    <script src="https://cdn.staticfile.net/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
-    <script>
-      window.MathJax = {{
-        tex: {{
-          inlineMath: [['$', '$']],
-          displayMath: [['$$', '$$']],
-          processEscapes: true
-        }}
-      }};
-    </script>
-    <style>
-        body {{ font-family: 'Microsoft YaHei', sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: 40px auto; padding: 20px; }}
-        h1 {{ text-align: center; color: #1f50ff; border-bottom: 2px solid #1f50ff; padding-bottom: 10px; }}
-        h2 {{ color: #222; margin-top: 30px; border-left: 4px solid #1f50ff; padding-left: 10px; }}
-        table {{ width: 100%; border-collapse: collapse; margin-top: 15px; margin-bottom: 20px; font-size: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }}
-        th, td {{ border: 1px solid #dcdfe6; padding: 12px 15px; text-align: left; }}
-        th {{ background-color: #f4f6f9; color: #333; font-weight: bold; text-transform: uppercase; }}
-        tr:nth-child(even) {{ background-color: #fafafa; }}
-        tr:hover {{ background-color: #f0f4ff; transition: 0.2s; }}
-        blockquote {{ border-left: 4px solid #ccc; margin: 15px 0; padding-left: 15px; color: #666; background: #f9f9f9; padding: 10px; }}
-    </style>
-    </head>
-    <body>
-    {html_body}
-    </body>
-    </html>"""
+                                    <html>
+                                    <head>
+                                    <meta charset="utf-8">
+                                    <title>爱选型 - 技术报告</title>
+                                    <style>
+                                        body {{ font-family: 'Microsoft YaHei', sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: 40px auto; padding: 20px; }}
+                                        h1 {{ text-align: center; color: #1f50ff; border-bottom: 2px solid #1f50ff; padding-bottom: 10px; }}
+                                        h2 {{ color: #222; margin-top: 30px; border-left: 4px solid #1f50ff; padding-left: 10px; }}
+                                        table {{ width: 100%; border-collapse: collapse; margin-top: 15px; margin-bottom: 20px; font-size: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }}
+                                        th, td {{ border: 1px solid #dcdfe6; padding: 12px 15px; text-align: left; }}
+                                        th {{ background-color: #f4f6f9; color: #333; font-weight: bold; text-transform: uppercase; }}
+                                        tr:nth-child(even) {{ background-color: #fafafa; }}
+                                        tr:hover {{ background-color: #f0f4ff; transition: 0.2s; }}
+                                        blockquote {{ border-left: 4px solid #ccc; margin: 15px 0; padding-left: 15px; color: #666; background: #f9f9f9; padding: 10px; }}
+                                    </style>
+                                    </head>
+                                    <body>
+                                    {html_body}
+                                    </body>
+                                    </html>"""
 
                                 st.session_state["active_idx"] = i
                                 st.session_state["active_content"] = html_template
@@ -301,15 +277,14 @@ if st.session_state.current_page == "💬 选型助理":
                             except Exception as e:
                                 st.toast(f"云端网络超时或接口异常: {str(e)}", icon="⚠️")
 
-                # 注意这里！下载按钮和上面的 with st.chat_message 平级对齐
-                if st.session_state.get("active_idx") == i:
-                    st.download_button(
-                        label="下载报告 (.html)",
-                        data=st.session_state.get("active_content", ""),
-                        file_name=f"Spec_Report_{datetime.now().strftime('%m%d_%H%M')}.html",
-                        mime="text/html",
-                        key=f"d_{i}"
-                    )
+                    if st.session_state.get("active_idx") == i:
+                        st.download_button(
+                            label="下载报告 (.html)",
+                            data=st.session_state.get("active_content", ""),
+                            file_name=f"Spec_Report_{datetime.now().strftime('%m%d_%H%M')}.html",
+                            mime="text/html",
+                            key=f"d_{i}"
+                        )
 
     user_input = st.chat_input("今天有什么是我可以帮到你的呢(*^▽^*)", accept_file=True)
 
@@ -349,7 +324,7 @@ if st.session_state.current_page == "💬 选型助理":
                     st.session_state.messages)
             st.rerun()
 
-    # AI 生成回复处理
+    # AI 生成回复
     if st.session_state.messages and st.session_state.messages[-1]["role"] == "user":
         client = OpenAI(api_key=API_KEY, base_url=BASE_URL)
         safe_kb = kb_text[:15000]
