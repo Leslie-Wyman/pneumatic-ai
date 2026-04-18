@@ -16,6 +16,8 @@ API_KEY = "sk-iyznjopbdylxmcjtteregjqpeixnsmbnuwfpvaiejpbqdomd"
 BASE_URL = "https://api.siliconflow.cn/v1"
 MODEL_NAME = "deepseek-ai/DeepSeek-V3"
 
+
+
 st.set_page_config(
     page_title="爱选型",
     layout="wide",
@@ -352,6 +354,19 @@ if st.session_state.current_page == "💬 选型助理":
            - 垂直顶升或中速 (v ≈ 300 mm/s)：η ≤ 0.5
            - 高速冲击 (v > 500 mm/s)：η ≤ 0.3
         3. 安全推力校核：理论推力 F_t 必须满足 F_t ≥ F / η。
+        
+        【最优解筛选策略（Tie-breaker Rules）】
+        如果在知识库中匹配到多个满足推力与负载率要求的气缸型号，你必须严格按照以下优先级的顺序进行唯一解过滤，不可随机挑选：
+        1. 能效最优原则：优先推荐满足条件的前提下，缸径（Bore Size）最小的那一款（以减少系统耗气量）。
+        2. 轻量化原则：如果缸径相同，优先推荐属于“薄型气缸/紧凑型气缸”分类的型号。
+        3. 如果上述条件完全一致，强制按品牌/型号名称的英文字母表顺序，推荐排名第一的型号。
+        
+        【物理计算输出模板】
+        你的物理计算推理过程必须严格采用以下结构进行输出，不得擅自改变顺序：
+        1. 实际负荷确认
+        2. 负载率读取
+        3. 物理计算推理
+        4. 数据库匹配
 
         【输出格式规训】：
         1. 必须输出包含【项号】、【元件类别】、【品牌型号】、【技术规格】的 Markdown 表格。
@@ -374,6 +389,8 @@ if st.session_state.current_page == "💬 选型助理":
                     model=MODEL_NAME,
                     messages=clean_messages,
                     stream=True,
+                    temperature=0.0,
+                    top_p=0.1,
                     timeout=30
                 )
 
