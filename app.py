@@ -229,6 +229,7 @@ if st.session_state.current_page == "💬 选型助理":
                                                      2. 该报告中禁止出现任何公式，所有的校核结果只用填数据并与安全范围或理论值比较
                                                      3. 只要有参数、型号、对比数据，必须严格使用 Markdown 表格进行排版。
                                                      4. 语境必须是正规的技术公文，去除所有闲聊和寒暄。
+                                                     5. 严禁在BOM结尾擅自增加任何内容，“工程建议”完结后立即结束输出。
 
 
                                                     【用户工况需求】：{user_question}
@@ -244,7 +245,7 @@ if st.session_state.current_page == "💬 选型助理":
                                     timeout=90
                                 )
 
-                                raw_md = f"# 选型技术规格书\n\n> 生成时间：{datetime.now().strftime('%Y-%m-%d %H:%M')} (UTC+0)\n\n" + \
+                                raw_md = f"# 选型技术规格书\n\n> 生成时间：{datetime.now().strftime('%Y-%m-%d %H:%M')} (UTC+8)                              https://leslie2026-scut.streamlit.app\n\n" + \
                                          res.choices[0].message.content
 
                                 html_body = markdown.markdown(raw_md, extensions=['tables'])
