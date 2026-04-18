@@ -245,8 +245,13 @@ if st.session_state.current_page == "💬 选型助理":
                                     timeout=90
                                 )
 
-                                raw_md = f"# 选型技术规格书\n\n> 生成时间：{datetime.now().strftime('%Y-%m-%d %H:%M')} (UTC+8)                              https://leslie2026-scut.streamlit.app\n\n" + \
-                                         res.choices[0].message.content
+                                # --- 替换原来的 raw_md 定义 ---
+                                time_now = datetime.now().strftime('%Y-%m-%d %H:%M')
+                                # 构造靠右对齐的网址标签
+                                url_html = f'<span style="float: right;">系统网址：<a href="https://leslie2026-scut.streamlit.app" style="color: #1f50ff; text-decoration: none;">leslie2026-scut.streamlit.app</a></span>'
+
+                                # 将网址标签插入到引用块的最前面
+                                raw_md = f"# 气动系统选型技术报告\n\n> {url_html}生成时间：{time_now}\n\n" + bom_only_content
 
                                 html_body = markdown.markdown(raw_md, extensions=['tables'])
 
