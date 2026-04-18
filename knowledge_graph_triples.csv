@@ -320,14 +320,14 @@ VBA,IS_A_CLASS,AirPrep
 VBA,Brand,SMC
 VBA,Component,Booster
 VBA,Filtration,Pressure Multiplier
-VBA,Drain_Type,Max 2.0MPa
+VBA,Drain_Type,2.0 MPa
 VBA,Description,"1/4, 3/8, 1/2"
 VBA,Unnamed: 7,气动增压阀，无需纯电，纯靠气动将局部气路压力放大2-4倍
 HR,IS_A_CLASS,AirPrep
 HR,Brand,AirTAC
 HR,Component,Regulator
 HR,Filtration,Precision
-HR,Drain_Type,0.005-0.8MPa
+HR,Drain_Type,0.005-0.8 MPa
 HR,Description,"1/4, 3/8"
 HR,Unnamed: 7,高精密减压阀，压力波动极小，用于张力控制或测漏设备
 AMH,IS_A_CLASS,AirPrep
@@ -425,7 +425,7 @@ ISE30A,IS_A_CLASS,Sensors
 ISE30A,Brand,SMC
 ISE30A,Type,Pressure
 ISE30A,Output_Signal,NPN/PNP + Analog
-ISE30A,Detect_Range,-0.1 to 1.0 MPa
+ISE30A,Detect_Range,0.1-1.0 MPa
 ISE30A,Applicable,Air Lines
 ISE30A,Description,数字压力开关，双色显示，带模拟量输出
 PFM7,IS_A_CLASS,Sensors
