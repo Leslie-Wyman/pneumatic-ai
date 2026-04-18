@@ -6,6 +6,7 @@ import warnings
 import streamlit.components.v1 as components
 import os
 import markdown
+import re
 
 
 #  0. 全局配置
@@ -238,10 +239,24 @@ if st.session_state.current_page == "💬 选型助理":
                                 timeout=90
                             )
 
-                            raw_md = f"# 选型技术规格书\n\n> 生成时间：{datetime.now().strftime('%Y-%m-%d %H:%M')}(UTC+0)\n\n" + \
+                            raw_md = f"# 选型技术规格书\n\n> 生成时间：{datetime.now().strftime('%Y-%m-%d %H:%M')} (UTC+0)\n\n" + \
                                      res.choices[0].message.content
 
                             html_body = markdown.markdown(raw_md, extensions=['tables'])
+
+                            # 模拟论文中提到的 f_extract 映射函数
+                            def extract_bom_matrix(text):
+                                # 查找 Markdown 表格特征的正则
+                                table_pattern = r'\|.*\|'
+                                tables = re.findall(table_pattern, text)
+                                if tables:
+                                    # 这里模拟将非结构化文本降维过滤，仅保留表格核心内容
+                                    return "\n".join(tables)
+                                return text
+
+                            bom_only_content = extract_bom_matrix(res.choices[0].message.content)
+
+                            raw_md = f"# 选型技术规格书\n\n> 生成时间：{datetime.now().strftime('%Y-%m-%d %H:%M')} (UTC+0)\n\n" + bom_only_content
 
                             html_template = f"""<!DOCTYPE html>
                         <html>
@@ -325,14 +340,28 @@ if st.session_state.current_page == "💬 选型助理":
 
         system_prompt = f"""
         你是一个精通【机电一体化】的气动选型专家。
+
+        【核心事实约束】：
+        禁止检索外部网络与自身语料，必须且仅能从下列【知识库】提供的气动三元组矩阵中提取受力与耐压参数。
+
+        【物理逻辑思维链 (CoT) 强制要求】：
+        在进行选型推荐前，你必须在回复中显式执行以下校核：
+        1. 计算推力需求 F_req：F = (m * g * μ + F_a)。
+        2. 负载率 (η) 强制约束：
+           - 静载荷或低速 (v < 100 mm/s)：η ≤ 0.8
+           - 垂直顶升或中速 (v ≈ 300 mm/s)：η ≤ 0.5
+           - 高速冲击 (v > 500 mm/s)：η ≤ 0.3
+        3. 安全推力校核：理论推力 F_t 必须满足 F_t ≥ F / η。
+
+        【输出格式规训】：
+        1. 必须输出包含【项号】、【元件类别】、【品牌型号】、【技术规格】的 Markdown 表格。
+        2. 严禁使用 Emoji。
+        3. 最终输出前执行 FCheck 自检，确保表格闭合且无非法字符。
+
         【知识库】
         {safe_kb}
-
-        【要求】
-        1. 严谨、专业，对比推荐时必须输出 Markdown 表格。
-        2. 严禁使用 Emoji 表情符号做标题，回答保持严谨。
-        3. 语气绝对专业，必须结合负载、工况进行力学或气动学分析。
         """
+
 
         with st.chat_message("assistant", avatar="🤖"):
             try:
