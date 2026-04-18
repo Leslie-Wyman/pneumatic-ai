@@ -219,18 +219,36 @@ if st.session_state.current_page == "💬 选型助理":
                 if save_clicked:
                     user_question = st.session_state.messages[i - 1]["content"] if i > 0 else "未提供具体工况"
 
-                    with st.spinner("正在融合工况数据，生成规格书中"):
-                        doc_prompt = f"""
-                                        请作为资深气动工程师，将以下【用户的工况需求】与【AI的选型方案】总结成一份专业的《气动系统选型技术报告》。
+                    # --- 修改 app.py 里的文档生成逻辑（约 180-200 行） ---
+with st.spinner("正在执行特征抽离与公式渲染重构..."):
+    # 1. 提取 AI 回复内容
+    ai_raw_content = message['content']
+    
+    # 2. 调用之前的特征抽离函数（落实论文 4.3.1）
+    bom_only_content = extract_bom_matrix(ai_raw_content)
 
-                                        核心要求：
-                                        1. 必须且仅包含五项：项目工况概述、推荐型号清单、技术校核分析、最终推荐结果、工程建议。
-                                        2. 只要有参数、型号、对比数据，必须严格使用 Markdown 表格进行排版。
-                                        3. 语境必须是正规的技术公文，去除所有闲聊和寒暄，不要在报告尾部自主添加任何多余部分，“工程建议”即是本报告的结尾。
+    # 3. 构造规格书 Markdown 源码
+    raw_md = f"# 气动系统选型技术报告\n\n> 生成时间：{datetime.now().strftime('%Y-%m-%d %H:%M')}\n\n" + bom_only_content
 
-                                        【用户工况需求】：{user_question}
-                                        【AI选型方案】：{message['content']}
-                                        """
+    # 4. 执行交叉编译，注意这里我们不再依赖复杂的扩展，只确保基础 HTML 生成
+    html_body = markdown.markdown(raw_md, extensions=['tables'])
+
+    # 5. 注入“学术级”公式渲染引擎 MathJax 3.0 配置
+    html_template = f"""<!DOCTYPE html>
+    <html>
+    <head>
+    <meta charset="utf-8">
+    <script src="https://cdn.staticfile.net/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+    <script>
+      window.MathJax = {{
+        tex: {{
+          inlineMath: [['$', '$']],
+          displayMath: [['$$', '$$']],
+          processEscapes: true
+        }}
+      }};
+    </script>
+    ... (保持 CSS 样式不变)
 
                         try:
                             client = OpenAI(api_key=API_KEY, base_url=BASE_URL)
@@ -377,6 +395,7 @@ if st.session_state.current_page == "💬 选型助理":
         1. 能效最优原则：优先推荐满足条件的前提下，缸径（Bore Size）最小的那一款（以减少系统耗气量）。
         2. 轻量化原则：如果缸径相同，优先推荐属于“薄型气缸/紧凑型气缸”分类的型号。
         3. 经济性原则：综合考虑成本及使用寿命等因素推荐。
+        4. 如果在上述选型原则中各有优势，则按元件名称（注意是器件名，不是品牌名，如CP96）的首字母排序优先推荐。此条原则仅作为评判，严禁在对话中体现。
         
         【物理计算输出模板】
         你的物理计算推理过程必须严格采用以下结构进行输出，不得擅自改变顺序：
@@ -390,8 +409,8 @@ if st.session_state.current_page == "💬 选型助理":
         1. 必须输出包含【项号】、【元件类别】、【品牌型号】、【技术规格】的 Markdown 表格。
         2. 严禁使用 Emoji。
         3. 最终输出前执行 FCheck 自检，确保表格闭合且无非法字符。
-        4. 必须使用 Streamlit 能够识别的 LaTeX 符号。当出现任何公式和字母系数，必须使用标准的 LaTeX 语法。行内公式请务必使用单个美元符号（例如 $E=mc^2$）包裹，独立行公式请务必使用双美元符号（例如$$F=ma$$）包裹。 严禁使用 \[ ... \] 或 \( ... \) 等定界符。”
-
+        4. 必须使用 Streamlit 能够识别的 LaTeX 符号。在 LaTeX 中表示乘法请统一使用 \\cdot 或 \\times。当出现任何公式和字母系数，必须使用标准的 LaTeX 语法。行内公式请务必使用单个美元符号（例如 $E=mc^2$）包裹，独立行公式请务必使用双美元符号（例如$$F=ma$$）包裹。 严禁使用 \[ ... \] 或 \( ... \) 等定界符。”
+        5. 严禁使用 <sub>、<sup> 或任何 HTML 标签来表示下标或指数。
         【知识库】
         {safe_kb}
         """
