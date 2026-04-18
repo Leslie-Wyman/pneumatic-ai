@@ -220,35 +220,35 @@ if st.session_state.current_page == "💬 选型助理":
                     user_question = st.session_state.messages[i - 1]["content"] if i > 0 else "未提供具体工况"
 
                     # --- 修改 app.py 里的文档生成逻辑（约 180-200 行） ---
-with st.spinner("正在执行特征抽离与公式渲染重构..."):
-    # 1. 提取 AI 回复内容
-    ai_raw_content = message['content']
+                with st.spinner("正在执行特征抽离与公式渲染重构..."):
+                    # 1. 提取 AI 回复内容
+                    ai_raw_content = message['content']
     
-    # 2. 调用之前的特征抽离函数（落实论文 4.3.1）
-    bom_only_content = extract_bom_matrix(ai_raw_content)
+                    # 2. 调用之前的特征抽离函数（落实论文 4.3.1）
+                    bom_only_content = extract_bom_matrix(ai_raw_content)
 
-    # 3. 构造规格书 Markdown 源码
-    raw_md = f"# 气动系统选型技术报告\n\n> 生成时间：{datetime.now().strftime('%Y-%m-%d %H:%M')}\n\n" + bom_only_content
+                    # 3. 构造规格书 Markdown 源码
+                    raw_md = f"# 气动系统选型技术报告\n\n> 生成时间：{datetime.now().strftime('%Y-%m-%d %H:%M')}\n\n" + bom_only_content
 
-    # 4. 执行交叉编译，注意这里我们不再依赖复杂的扩展，只确保基础 HTML 生成
-    html_body = markdown.markdown(raw_md, extensions=['tables'])
+                    # 4. 执行交叉编译，注意这里我们不再依赖复杂的扩展，只确保基础 HTML 生成
+                    html_body = markdown.markdown(raw_md, extensions=['tables'])
 
-    # 5. 注入“学术级”公式渲染引擎 MathJax 3.0 配置
-    html_template = f"""<!DOCTYPE html>
-    <html>
-    <head>
-    <meta charset="utf-8">
-    <script src="https://cdn.staticfile.net/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
-    <script>
-      window.MathJax = {{
-        tex: {{
-          inlineMath: [['$', '$']],
-          displayMath: [['$$', '$$']],
-          processEscapes: true
-        }}
-      }};
-    </script>
-    ... (保持 CSS 样式不变)
+                    # 5. 注入“学术级”公式渲染引擎 MathJax 3.0 配置
+                    html_template = f"""<!DOCTYPE html>
+                    <html>
+                    <head>
+                    <meta charset="utf-8">
+                    <script src="https://cdn.staticfile.net/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+                    <script>
+                      window.MathJax = {{
+                        tex: {{
+                          inlineMath: [['$', '$']],
+                          displayMath: [['$$', '$$']],
+                          processEscapes: true
+                        }}
+                      }};
+                    </script>
+                    ... (保持 CSS 样式不变)
 
                         try:
                             client = OpenAI(api_key=API_KEY, base_url=BASE_URL)
