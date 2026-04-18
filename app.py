@@ -219,7 +219,7 @@ if st.session_state.current_page == "💬 选型助理":
                 if save_clicked:
                     user_question = st.session_state.messages[i - 1]["content"] if i > 0 else "未提供具体工况"
 
-                 with st.spinner("正在融合工况数据，生成规格书中"):
+                     with st.spinner("正在融合工况数据，生成规格书中"):
                         doc_prompt = f"""
                                         请作为资深气动工程师，将以下【用户的工况需求】与【AI的选型方案】总结成一份专业的《气动系统选型技术报告》。
 
