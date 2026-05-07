@@ -7,6 +7,12 @@ CP96,Bore_mm,"32, 40, 50, 63, 80, 100, 125"
 CP96,Range_Spec,Stroke: 25-2000mm
 CP96,Mounting_Options,"LB (脚座), FA/FB (法兰), CA/CB (耳环)"
 CP96,Description,高性能米字型气缸，带气缓冲，适合通用推拉
+CP96,Adaptation_Relationship1,D-M9B
+CP96,Adaptation_Relationship2,D-A93
+CP96,Adaptation_Relationship3,D-M9NW
+CP96,Adaptation_Relationship4,SY5000
+CP96,Adaptation_Relationship5,4V230C
+CP96,Adaptation_Relationship6,VM
 SC,IS_A_CLASS,Actuators
 SC,Brand,AirTAC
 SC,Category,Standard
@@ -15,6 +21,10 @@ SC,Bore_mm,32-200
 SC,Range_Spec,Stroke: 25-1000mm
 SC,Mounting_Options,"LB, FA, CA"
 SC,Description,亚德客经典款，性价比极高，市场保有量大
+SC,Adaptation_Relationship1,CS1-F
+SC,Adaptation_Relationship2,DMSG
+SC,Adaptation_Relationship3,4V210
+SC,Adaptation_Relationship4,4V230C
 DSBC,IS_A_CLASS,Actuators
 DSBC,Brand,Festo
 DSBC,Category,Standard
@@ -23,6 +33,7 @@ DSBC,Bore_mm,32-125
 DSBC,Range_Spec,Stroke: 25-2000mm
 DSBC,Mounting_Options,Modular System
 DSBC,Description,德系标准缸，带 PPS 自调节缓冲，无需人工调整
+DSBC,Adaptation_Relationship1,SY5000
 CQ2,IS_A_CLASS,Actuators
 CQ2,Brand,SMC
 CQ2,Category,Compact
@@ -31,6 +42,9 @@ CQ2,Bore_mm,"12, 16, 20, 25, 32, 40, 50, 63, 80, 100"
 CQ2,Range_Spec,Stroke: 5-100mm
 CQ2,Mounting_Options,通孔，内螺纹，外螺纹
 CQ2,Description,行业标杆薄型气缸，节省空间，治具首选
+CQ2,Adaptation_Relationship1,D-M9B
+CQ2,Adaptation_Relationship2,D-M9NW
+CQ2,Adaptation_Relationship3,SY3000
 SDA,IS_A_CLASS,Actuators
 SDA,Brand,AirTAC
 SDA,Category,Compact
@@ -39,6 +53,9 @@ SDA,Bore_mm,12-100
 SDA,Range_Spec,Stroke: 5-100mm
 SDA,Mounting_Options,内螺纹 (标准)
 SDA,Description,亚德客超薄气缸，结构简单紧凑
+SDA,Adaptation_Relationship1,CS1-F
+SDA,Adaptation_Relationship2,DMSG
+SDA,Adaptation_Relationship3,SY3000
 MGPM,IS_A_CLASS,Actuators
 MGPM,Brand,SMC
 MGPM,Category,Guided Slide
@@ -47,6 +64,8 @@ MGPM,Bore_mm,12-100
 MGPM,Range_Spec,Stroke: 10-400mm
 MGPM,Mounting_Options,法兰安装
 MGPM,Description,三轴导杆气缸，滑动轴承耐冲击，适合推料 / 阻挡
+MGPM,Adaptation_Relationship1,D-M9B
+MGPM,Adaptation_Relationship2,SY5000
 MY1,IS_A_CLASS,Actuators
 MY1,Brand,SMC
 MY1,Category,Rodless
@@ -55,6 +74,8 @@ MY1,Bore_mm,16-100
 MY1,Range_Spec,Stroke: 100-5000mm
 MY1,Mounting_Options,两端安装
 MY1,Description,机械接合式无杆气缸，超长行程，节省轴向空间
+MY1,Adaptation_Relationship1,D-M9B
+MY1,Adaptation_Relationship2,SY5000
 MSQB,IS_A_CLASS,Actuators
 MSQB,Brand,SMC
 MSQB,Category,Rotary
@@ -63,6 +84,8 @@ MSQB,Bore_mm,"10, 20, 30, 50"
 MSQB,Range_Spec,Angle: 0-190°
 MSQB,Mounting_Options,螺钉调节
 MSQB,Description,齿轮齿条式摆动气缸，用于工件翻转，角度可调
+MSQB,Adaptation_Relationship1,D-M9B
+MSQB,Adaptation_Relationship2,SY3000
 MHZ2,IS_A_CLASS,Actuators
 MHZ2,Brand,SMC
 MHZ2,Category,Gripper
@@ -183,6 +206,7 @@ VT307,Function,3/2Universal
 VT307,Voltage_Signal,"DC24V, AC220V"
 VT307,Port_Size,"1/8, 1/4"
 VT307,Description,直动式高频阀，可用于真空环境或单作用气缸
+VT307,Adaptation_Relationship1,VM
 SY5000,IS_A_CLASS,Valves
 SY5000,Brand,SMC
 SY5000,Category,Solenoid
@@ -268,6 +292,10 @@ AC-A,Filtration,5μm
 AC-A,Drain_Type,Auto/Manual
 AC-A,Port_Size,"1/4, 3/8, 1/2"
 AC-A,Description,模块化FRL组合(过滤+减压+油雾)，标准气源处理
+AC-A,Adaptation_Relationship1,AV
+AC-A,Adaptation_Relationship2,ISE30A
+AC-A,Adaptation_Relationship3,PFM7
+AC-A,Adaptation_Relationship4,IR
 AC,IS_A_CLASS,AirPrep
 AC,Brand,AirTAC
 AC,Component,FRL Unit
@@ -275,11 +303,14 @@ AC,Filtration,40μm
 AC,Drain_Type,Manual/Auto
 AC,Port_Size,"1/4, 3/8"
 AC,Description,亚德客标准二联件，经济适用
+AC,Adaptation_Relationship1,DPS
+AC,Adaptation_Relationship2,GPR
 IR,IS_A_CLASS,AirPrep
 IR,Brand,SMC
 IR,Component,Regulator
 IR,Port_Size,"1/8, 1/4"
 IR,Description,精密减压阀，用于需要高精度压力控制的张力系统
+IR,Adaptation_Relationship1,ITV1000
 AFF,IS_A_CLASS,AirPrep
 AFF,Brand,SMC
 AFF,Component,Main Filter
@@ -287,6 +318,7 @@ AFF,Filtration,1μm
 AFF,Drain_Type,Auto
 AFF,Port_Size,1/2 - 2
 AFF,Description,主管路过滤器，去除油雾和杂质
+AFF,Adaptation_Relationship1,IDG
 AV,IS_A_CLASS,AirPrep
 AV,Brand,SMC
 AV,Component,Soft Start
@@ -300,16 +332,19 @@ GFC,Filtration,40μm
 GFC,Drain_Type,Auto/Manual
 GFC,Port_Size,"1/4, 3/8, 1/2"
 GFC,Description,亚德客G系列二联件，外观更现代，带内置压力表
+GFC,Adaptation_Relationship1,GPR
 GPR,IS_A_CLASS,AirPrep
 GPR,Brand,AirTAC
 GPR,Component,Regulator
 GPR,Port_Size,1/4
 GPR,Description,精密减压阀，低压控制灵敏度高，用于平衡装置或张力控制
+GPR,Adaptation_Relationship1,ITV1000
 IDG,IS_A_CLASS,AirPrep
 IDG,Brand,SMC
 IDG,Component,Dryer
 IDG,Port_Size,"1/4, 3/8"
 IDG,Description,膜式空气干燥器，去除压缩空气中的水蒸气，无需电源
+IDG,Adaptation_Relationship1,AC-A
 AD402,IS_A_CLASS,AirPrep
 AD402,Brand,SMC
 AD402,Component,Drain
@@ -321,34 +356,36 @@ VBA,Brand,SMC
 VBA,Component,Booster
 VBA,Filtration,Pressure Multiplier
 VBA,Drain_Type,2.0 MPa
-VBA,Description,"1/4, 3/8, 1/2"
-VBA,Unnamed: 7,气动增压阀，无需纯电，纯靠气动将局部气路压力放大2-4倍
+VBA,Port_Size,"1/4, 3/8, 1/2"
+VBA,Description,气动增压阀，无需纯电，纯靠气动将局部气路压力放大2-4倍
 HR,IS_A_CLASS,AirPrep
 HR,Brand,AirTAC
 HR,Component,Regulator
 HR,Filtration,Precision
 HR,Drain_Type,0.005-0.8 MPa
-HR,Description,"1/4, 3/8"
-HR,Unnamed: 7,高精密减压阀，压力波动极小，用于张力控制或测漏设备
+HR,Port_Size,"1/4, 3/8"
+HR,Description,高精密减压阀，压力波动极小，用于张力控制或测漏设备
 AMH,IS_A_CLASS,AirPrep
 AMH,Brand,SMC
 AMH,Component,Micro Filter
 AMH,Filtration,0.01μm
 AMH,Drain_Type,Auto/Manual
-AMH,Description,1/4 - 2
-AMH,Unnamed: 7,微雾分离器，提供超净气源，滤除99.9%的油雾和微小颗粒
+AMH,Port_Size,1/4 - 2
+AMH,Description,微雾分离器，提供超净气源，滤除99.9%的油雾和微小颗粒
 ZK2,IS_A_CLASS,Vacuum
 ZK2,Brand,SMC
 ZK2,Type,Generator
 ZK2,Spec_Key,Ejector System
 ZK2,Connection,Integrated
 ZK2,Description,高端集成式真空发生器，集成了供给阀、破坏阀、过滤器
+ZK2,Adaptation_Relationship1,VT307
 ZH(SMC),IS_A_CLASS,Vacuum
 ZH(SMC),Brand,SMC
 ZH(SMC),Type,Generator
 ZH(SMC),Spec_Key,Box Type
 ZH(SMC),Connection,Tube
 ZH(SMC),Description,基础管接式真空发生器，结构简单，利用文丘里效应
+ZH(SMC),Adaptation_Relationship1,ZSE30A
 ZP3,IS_A_CLASS,Vacuum
 ZP3,Brand,SMC
 ZP3,Type,Pad
@@ -356,6 +393,9 @@ ZP3,Spec_Key,Suction Cup
 ZP3,Connection,Adapter
 ZP3,Shape,Flat/Bellows
 ZP3,Description,真空吸盘，平形吸钢板，风琴形吸软包装
+ZP3,Adaptation_Relationship1,ZFA
+ZP3,Adaptation_Relationship2,ZK2
+ZP3,Adaptation_Relationship3,OVEM
 OVEM,IS_A_CLASS,Vacuum
 OVEM,Brand,Festo
 OVEM,Type,Generator
@@ -369,6 +409,7 @@ ZP2,Spec_Key,Standard Pad
 ZP2,Connection,Vertical Entry
 ZP2,Shape,Flat/Ribbed
 ZP2,Description,标准型真空吸盘，材质多样(NBR/硅胶)，通用性强
+ZP2,Adaptation_Relationship1,ZFA
 ZPT(SMC),IS_A_CLASS,Vacuum
 ZPT(SMC),Brand,SMC
 ZPT(SMC),Type,Pad
@@ -376,6 +417,7 @@ ZPT(SMC),Spec_Key,Heavy Duty
 ZPT(SMC),Connection,Plunger
 ZPT(SMC),Shape,Deep/Flat
 ZPT(SMC),Description,重载吸盘，带缓冲弹簧杆，适合有高度差的工件抓取
+ZPT(SMC),Adaptation_Relationship1,ZFA
 ZPT(AT),IS_A_CLASS,Vacuum
 ZPT(AT),Brand,AirTAC
 ZPT(AT),Type,Pad
@@ -383,24 +425,29 @@ ZPT(AT),Spec_Key,Suction Cup
 ZPT(AT),Connection,Vertical
 ZPT(AT),Shape,Flat/Bellows
 ZPT(AT),Description,亚德客通用吸盘，性价比高，替换SMC对应型号
+ZPT(AT),Adaptation_Relationship1,ZFA
 ZH(AT),IS_A_CLASS,Vacuum
 ZH(AT),Brand,AirTAC
 ZH(AT),Type,Generator
 ZH(AT),Spec_Key,Ejector
 ZH(AT),Connection,Inline/Box
 ZH(AT),Description,亚德客基本型真空发生器，管式连接，轻便易安装
+ZH(AT),Adaptation_Relationship1,DPS
 XT661,IS_A_CLASS,Vacuum
 XT661,Brand,SMC
 XT661,Type,Pad
 XT661,Spec_Key,Bernoulli
 XT661,Shape,Flat
 XT661,Description,伯努利悬浮吸盘，非接触式抓取，专用于易碎、极薄或多孔透气工件
+XT661,Adaptation_Relationship1,ZFA
 ZFA,IS_A_CLASS,Vacuum
 ZFA,Brand,SMC
 ZFA,Type,Filter
 ZFA,Spec_Key,Vacuum Filter
 ZFA,Shape,Inline
 ZFA,Description,真空管路过滤器，串联在吸盘和发生器之间，防止粉尘吸入导致堵塞
+ZFA,Adaptation_Relationship1,ZH(SMC)
+ZFA,Adaptation_Relationship2,ZH(AT)
 VN,IS_A_CLASS,Vacuum
 VN,Brand,Festo
 VN,Type,Generator
