@@ -328,7 +328,7 @@ if st.session_state.current_page == "💬 选型助理":
     # AI 生成回复
     if st.session_state.messages and st.session_state.messages[-1]["role"] == "user":
         client = OpenAI(api_key=API_KEY, base_url=BASE_URL)
-        safe_kb = kb_text[:15000]
+        safe_kb = kb_text
 
         system_prompt = f"""
         你是一个精通【机电一体化】的气动选型专家，你的回答尽量简洁严肃公正。
