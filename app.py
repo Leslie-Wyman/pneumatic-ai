@@ -19,7 +19,7 @@ MODEL_NAME = "deepseek-ai/DeepSeek-V3"
 
 
 st.set_page_config(
-    page_title="爱选型",
+    page_title="气动达人",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -179,7 +179,7 @@ with st.sidebar:
 #  5. 主页面路由分发
 if st.session_state.current_page == "💬 选型助理":
     if len(st.session_state.messages) == 0:
-        st.markdown('<p class="big-title">爱选型(^_−)☆</p>', unsafe_allow_html=True)
+        st.markdown('<p class="big-title">气动达人(^_−)☆</p>', unsafe_allow_html=True)
         st.markdown('<p class="sub-title">更懂你的气动元件智能选型助手 —— Leslie in SCUT 2026</p>',
                     unsafe_allow_html=True)
         c1, c2, c3 = st.columns(3)
@@ -189,7 +189,7 @@ if st.session_state.current_page == "💬 选型助理":
         st.write("")
         st.write("")
     else:
-        st.markdown("### 💬 爱选型 - 智能助理")
+        st.markdown("### 💬 气动达人 - 智能助理")
         st.divider()
 
         # 对话与按钮渲染区
@@ -254,7 +254,7 @@ if st.session_state.current_page == "💬 选型助理":
                                     <html>
                                     <head>
                                     <meta charset="utf-8">
-                                    <title>爱选型 - 技术报告</title>
+                                    <title>气动达人 - 技术报告</title>
                                     <style>
                                         body {{ font-family: 'Microsoft YaHei', sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: 40px auto; padding: 20px; }}
                                         h1 {{ text-align: center; color: #1f50ff; border-bottom: 2px solid #1f50ff; padding-bottom: 10px; }}
