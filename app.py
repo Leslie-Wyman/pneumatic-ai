@@ -12,7 +12,7 @@ import re
 #  0. 全局配置
 warnings.filterwarnings("ignore")
 
-API_KEY = "sk-iyznjopbdylxmcjtteregjqpeixnsmbnuwfpvaiejpbqdomd"
+API_KEY = st.secrets["SILICON_API_KEY"]
 BASE_URL = "https://api.siliconflow.cn/v1"
 MODEL_NAME = "deepseek-ai/DeepSeek-V3"
 
